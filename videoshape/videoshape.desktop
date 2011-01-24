@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Video Shape
+Name[nl]=Video-vorm
+Name[pt]=Forma de Vídeo
+Name[pt_BR]=Forma de vídeo
+Name[sv]=Videoform
+Name[uk]=Форма відео
+Name[x-test]=xxVideo Shapexx
 X-KDE-ServiceTypes=KOffice/Shape
 Type=Service
 X-KDE-Library=videoshape
