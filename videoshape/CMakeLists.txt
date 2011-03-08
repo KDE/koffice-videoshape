@@ -2,7 +2,7 @@ include_directories( ${PHONON_INCLUDE_DIR} )
 
 ########### Flake Plugin library ###############
 
-SET (videoshape_LIB_SRCS
+SET (videoshape_SRCS
     VideoData.cpp
     VideoCollection.cpp
     VideoShape.cpp
@@ -13,15 +13,15 @@ SET (videoshape_LIB_SRCS
     FullScreenPlayer.cpp
 )
 
-kde4_add_plugin(videoshape ${videoshape_LIB_SRCS})
+kde4_add_plugin(videoshape ${videoshape_SRCS})
 
 target_link_libraries(videoshape ${FLAKE_LIBS}
     ${KDE4_KFILE_LIBRARY}
     ${KDE4_PHONON_LIBRARY}
 )
-install(TARGETS videoshape DESTINATION ${PLUGIN_INSTALL_DIR})
-
 ########### install files ###############
 
+install(TARGETS videoshape DESTINATION ${PLUGIN_INSTALL_DIR})
+
 install( FILES videoshape.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-kde4_install_icons( ${DATA_INSTALL_DIR}/koffice/icons )
+
