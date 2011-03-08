@@ -57,7 +57,7 @@ public:
      * @param videoData the other one.
      */
     VideoData(const VideoData &videoData);
-    
+
     /// destructor
     virtual ~VideoData();
 
@@ -73,7 +73,7 @@ public:
     bool saveData(QIODevice &device);
 
     QString tagForSaving(int &counter);
-    
+
     VideoData &operator=(const VideoData &other);
 
     inline bool operator!=(const VideoData &other) const { return !operator==(other); }

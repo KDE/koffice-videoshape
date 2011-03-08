@@ -102,7 +102,7 @@ bool VideoShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoading
 {
     /* the loading of the attributes might set the event actions which removes the m_videoEventAction
      * when there are other eventactions for the shape. Therefore we need to add it again. It is no
-     * problem to add it again as internally a set is used and so it is not problematic when it is 
+     * problem to add it again as internally a set is used and so it is not problematic when it is
      * already set. */
     addEventAction(m_videoEventAction);
 

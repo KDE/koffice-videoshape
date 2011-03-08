@@ -83,7 +83,7 @@ public:
      * Get the number of videos inside the collection
      */
     int count() const;
-    
+
     int saveCounter;
 
 private:
