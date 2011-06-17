@@ -19,18 +19,18 @@
 #ifndef VIDEOCOLLECTION_H
 #define VIDEOCOLLECTION_H
 
-#include <KoDataCenterBase.h>
+#include <KDataCenterBase.h>
 #include <QObject>
 
 class QUrl;
-class KoStore;
+class KOdfStore;
 class VideoData;
 
 /**
- * An collection of VideoData objects to allow loading and saving them all together to the KoStore.
+ * An collection of VideoData objects to allow loading and saving them all together to the KOdfStore.
  * It also makes sure that if the same image is added to the collection that they share the internal data structure.
  */
-class VideoCollection : public QObject, public KoDataCenterBase
+class VideoCollection : public QObject, public KDataCenterBase
 {
     Q_OBJECT
 public:
@@ -42,13 +42,13 @@ public:
     virtual ~VideoCollection();
 
     /// reimplemented
-    bool completeLoading(KoStore *store);
+    bool completeLoading(KOdfStore *store);
 
     /**
      * Save all videos to the store which are in the context
      * @return returns true if save was successful (no videos failed).
      */
-    bool completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context);
+    bool completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext *context);
 
     /**
      * Create a data object for the video data.
@@ -66,10 +66,10 @@ public:
      * existing data object with the same video the returned VideoData will
      * share its data.
      * @param href the name of the video inside the store.
-     * @param store the KoStore object.
+     * @param store the KOdfStore object.
      * @see VideoData::isValid()
      */
-    VideoData *createVideoData(const QString &href, KoStore *store);
+    VideoData *createVideoData(const QString &href, KOdfStore *store);
 
     void add(const VideoData &data);
     void remove(const VideoData &data);

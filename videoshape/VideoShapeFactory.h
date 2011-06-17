@@ -20,23 +20,23 @@
 #ifndef VIDEOSHAPEFACTORY_H
 #define VIDEOSHAPEFACTORY_H
 
-#include <KoShapeFactoryBase.h>
+#include <KShapeFactoryBase.h>
 
-class KoShape;
+class KShape;
 class VideoShapeConfigWidget;
 
-class VideoShapeFactory : public KoShapeFactoryBase
+class VideoShapeFactory : public KShapeFactoryBase
 {
 public:
     VideoShapeFactory(QObject *parent);
     ~VideoShapeFactory() {}
 
-    virtual KoShape *createDefaultShape(KoResourceManager *documentResources = 0) const;
-    virtual bool supports(const KoXmlElement &e, KoShapeLoadingContext &context) const;
+    virtual KShape *createDefaultShape(KResourceManager *documentResources = 0) const;
+    virtual bool supports(const KXmlElement &e, KShapeLoadingContext &context) const;
 
     /// reimplemented
-    virtual QList<KoShapeConfigWidgetBase*> createShapeOptionPanels();
-    virtual void newDocumentResourceManager(KoResourceManager *manager);
+    virtual QList<KShapeConfigWidgetBase*> createShapeOptionPanels();
+    virtual void newDocumentResourceManager(KResourceManager *manager);
 };
 
 #endif

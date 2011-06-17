@@ -20,11 +20,11 @@
  */
 #include "VideoCollection.h"
 #include "VideoData.h"
-#include "KoShapeSavingContext.h"
+#include "KShapeSavingContext.h"
 
-#include <KoStoreDevice.h>
+#include <KOdfStorageDevice.h>
 #include <QCryptographicHash>
-#include <KoXmlWriter.h>
+#include <KXmlWriter.h>
 
 #include <QMap>
 #include <kdebug.h>
@@ -57,14 +57,14 @@ VideoCollection::~VideoCollection()
     delete d;
 }
 
-bool VideoCollection::completeLoading(KoStore *store)
+bool VideoCollection::completeLoading(KOdfStore *store)
 {
     Q_UNUSED( store );
     d->storeVideos.clear();
     return true;
 }
 
-bool VideoCollection::completeSaving(KoStore *store, KoXmlWriter *manifestWriter, KoShapeSavingContext *context)
+bool VideoCollection::completeSaving(KOdfStore *store, KXmlWriter *manifestWriter, KShapeSavingContext *context)
 {
     Q_UNUSED(context);
     QMap<qint64, VideoData *>::iterator dataIt(d->videos.begin());
@@ -73,7 +73,7 @@ bool VideoCollection::completeSaving(KoStore *store, KoXmlWriter *manifestWriter
         if (!dataIt.value()->saveName.isEmpty()) {
             VideoData *videoData = dataIt.value();
             if (store->open(videoData->saveName)) {
-                KoStoreDevice device(store);
+                KOdfStorageDevice device(store);
                 bool ok = videoData->saveData(device);
                 store->close();
                 // TODO error handling
@@ -111,7 +111,7 @@ VideoData *VideoCollection::createExternalVideoData(const QUrl &url)
     return data;
 }
 
-VideoData *VideoCollection::createVideoData(const QString &href, KoStore *store)
+VideoData *VideoCollection::createVideoData(const QString &href, KOdfStore *store)
 {
     // the tricky thing with a 'store' is that we need to read the data now
     // as the store will no longer be readable after the loading completed.

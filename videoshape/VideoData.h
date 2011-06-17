@@ -23,21 +23,21 @@
 
 #include <QUrl>
 
-#include <KoShapeUserData.h>
+#include <KShapeUserData.h>
 
 class QIODevice;
 class VideoCollection;
 class VideoDataPrivate;
-class KoStore;
+class KOdfStore;
 class KTemporaryFile;
 
 /**
  * This class is meant to represent the video data so it can be shared between video shapes.
- * This class inherits from KoShapeUserData which means you can set it on any KoShape using
- * KoShape::setUserData() and get it using KoShape::userData().  The videoshape plugin
+ * This class inherits from KShapeUserData which means you can set it on any KShape using
+ * KShape::setUserData() and get it using KShape::userData().  The videoshape plugin
  * uses this class to show its video data.
  */
-class VideoData : public KoShapeUserData
+class VideoData : public KShapeUserData
 {
     Q_OBJECT
 public:
@@ -62,7 +62,7 @@ public:
     virtual ~VideoData();
 
     void setExternalVideo(const QUrl &location, VideoCollection *collection = 0);
-    void setVideo(const QString &location, KoStore *store, VideoCollection *collection = 0);
+    void setVideo(const QString &location, KOdfStore *store, VideoCollection *collection = 0);
 
     /**
      * Save the video data to the param device.

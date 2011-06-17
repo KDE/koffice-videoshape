@@ -21,26 +21,26 @@
 #define VIDEOSHAPE_H
 
 #include <QPixmap>
-#include <KoShape.h>
-#include <KoFrameShape.h>
+#include <KShape.h>
+#include <KFrameShape.h>
 
 #define VIDEOSHAPEID "VideoShape"
 
 class VideoCollection;
 class VideoEventAction;
 
-class VideoShape : public KoShape, public KoFrameShape
+class VideoShape : public KShape, public KFrameShape
 {
 public:
     VideoShape();
     virtual ~VideoShape();
 
     // reimplemented
-    virtual void paint(QPainter &painter, const KoViewConverter &converter);
+    virtual void paint(QPainter &painter, const KViewConverter &converter);
     // reimplemented
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual void saveOdf(KShapeSavingContext &context) const;
     // reimplemented
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
 
     /**
      * Get the collection used in the shape.
@@ -52,7 +52,7 @@ public:
     void setVideoCollection(VideoCollection *collection);
 
 protected:
-    virtual bool loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context);
+    virtual bool loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context);
 
 private:
     VideoCollection *m_videoCollection;

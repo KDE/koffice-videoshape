@@ -29,7 +29,7 @@
 #include <phonon/backendcapabilities.h>
 
 VideoShapeConfigWidget::VideoShapeConfigWidget()
-    : KoShapeConfigWidgetBase()
+    : KShapeConfigWidgetBase()
     ,m_shape(0),
     m_fileWidget(0)
 {
@@ -40,7 +40,7 @@ VideoShapeConfigWidget::~VideoShapeConfigWidget()
     delete m_fileWidget;
 }
 
-void VideoShapeConfigWidget::open(KoShape *shape)
+void VideoShapeConfigWidget::open(KShape *shape)
 {
     m_shape = dynamic_cast<VideoShape*>(shape);
     Q_ASSERT(m_shape);

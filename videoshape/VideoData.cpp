@@ -24,9 +24,9 @@
 
 #include "VideoCollection.h"
 
-#include <KoUnit.h>
-#include <KoStore.h>
-#include <KoStoreDevice.h>
+#include <KUnit.h>
+#include <KOdfStore.h>
+#include <KOdfStorageDevice.h>
 
 #include <kdebug.h>
 
@@ -37,7 +37,7 @@
 #include <QPainter>
 
 VideoData::VideoData()
-    : KoShapeUserData()
+    : KShapeUserData()
     , key(0)
     , errorCode(VideoData::Success)
     , collection(0)
@@ -47,7 +47,7 @@ VideoData::VideoData()
 }
 
 VideoData::VideoData(const VideoData &videoData)
-    : KoShapeUserData()
+    : KShapeUserData()
 {
     Q_UNUSED(videoData);
     //TODO copy the videodata - this is a copy constructor
@@ -89,7 +89,7 @@ void VideoData::setExternalVideo(const QUrl &location, VideoCollection *col)
     }
 }
 
-void VideoData::setVideo(const QString &url, KoStore *store, VideoCollection *collection)
+void VideoData::setVideo(const QString &url, KOdfStore *store, VideoCollection *collection)
 {
     if (collection) {
         // let the collection first check if it already has one. If it doesn't it'll call this method
@@ -100,7 +100,7 @@ void VideoData::setVideo(const QString &url, KoStore *store, VideoCollection *co
     } else {
         setSuffix(url);
         if (store->open(url)) {
-            KoStoreDevice device(store);
+            KOdfStorageDevice device(store);
             QByteArray data = device.readAll();
             if (!device.open(QIODevice::ReadOnly)) {
                 kWarning(30006) << "open file from store " << url << "failed";

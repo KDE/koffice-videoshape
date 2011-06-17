@@ -23,24 +23,24 @@
 #include "VideoShape.h"
 #include "VideoShapeConfigWidget.h"
 
-#include <KoXmlNS.h>
-#include "KoShapeControllerBase.h"
-#include <KoShapeLoadingContext.h>
+#include <KOdfXmlNS.h>
+#include "KShapeControllerBase.h"
+#include <KShapeLoadingContext.h>
 #include "VideoCollection.h"
 
 #include <klocale.h>
 #include <kdebug.h>
 
 VideoShapeFactory::VideoShapeFactory(QObject *parent)
-    : KoShapeFactoryBase(parent, VIDEOSHAPEID, i18n("Video"))
+    : KShapeFactoryBase(parent, VIDEOSHAPEID, i18n("Video"))
 {
     setToolTip(i18n("Video, embedded or fullscreen"));
     setIcon("video-x-generic");
-    setOdfElementNames(KoXmlNS::draw, QStringList("plugin"));
+    setOdfElementNames(KOdfXmlNS::draw, QStringList("plugin"));
     setLoadingPriority(1);
 }
 
-KoShape *VideoShapeFactory::createDefaultShape(KoResourceManager *documentResources) const
+KShape *VideoShapeFactory::createDefaultShape(KResourceManager *documentResources) const
 {
     VideoShape * defaultShape = new VideoShape();
     defaultShape->setShapeId(VIDEOSHAPEID);
@@ -52,22 +52,22 @@ KoShape *VideoShapeFactory::createDefaultShape(KoResourceManager *documentResour
     return defaultShape;
 }
 
-bool VideoShapeFactory::supports(const KoXmlElement &e, KoShapeLoadingContext &context) const
+bool VideoShapeFactory::supports(const KXmlElement &e, KShapeLoadingContext &context) const
 {
     Q_UNUSED(context);
-    return e.localName() == "plugin" && e.namespaceURI() == KoXmlNS::draw;
+    return e.localName() == "plugin" && e.namespaceURI() == KOdfXmlNS::draw;
 }
 
-void VideoShapeFactory::newDocumentResourceManager(KoResourceManager *manager)
+void VideoShapeFactory::newDocumentResourceManager(KResourceManager *manager)
 {
     QVariant variant;
     variant.setValue<void*>(new VideoCollection(manager));
     manager->setResource(VideoCollection::ResourceId, variant);
 }
 
-QList<KoShapeConfigWidgetBase*> VideoShapeFactory::createShapeOptionPanels()
+QList<KShapeConfigWidgetBase*> VideoShapeFactory::createShapeOptionPanels()
 {
-    QList<KoShapeConfigWidgetBase*> panels;
+    QList<KShapeConfigWidgetBase*> panels;
     panels.append(new VideoShapeConfigWidget());
     return panels;
 }

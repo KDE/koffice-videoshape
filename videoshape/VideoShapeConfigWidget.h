@@ -20,27 +20,27 @@
 #ifndef VIDEOSHAPECONFIGWIDGET_H
 #define VIDEOSHAPECONFIGWIDGET_H
 
-#include <KoShapeConfigWidgetBase.h>
+#include <KShapeConfigWidgetBase.h>
 #include <kurl.h>
 #include <QtGui/QWidget>
 
 class VideoShape;
 class KFileWidget;
 
-class VideoShapeConfigWidget : public KoShapeConfigWidgetBase
+class VideoShapeConfigWidget : public KShapeConfigWidgetBase
 {
     Q_OBJECT
 public:
     VideoShapeConfigWidget();
     ~VideoShapeConfigWidget();
 
-    /// reimplemented from KoShapeConfigWidgetBase
-    virtual void open(KoShape *shape);
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
+    virtual void open(KShape *shape);
+    /// reimplemented from KShapeConfigWidgetBase
     virtual void save();
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual bool showOnShapeCreate();
-    /// reimplemented from KoShapeConfigWidgetBase
+    /// reimplemented from KShapeConfigWidgetBase
     virtual bool showOnShapeSelect();
 
 private:

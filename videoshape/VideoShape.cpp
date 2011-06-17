@@ -22,24 +22,24 @@
 
 #include "VideoShape.h"
 
-#include <KoViewConverter.h>
+#include <KViewConverter.h>
 #include <VideoEventAction.h>
 #include <VideoCollection.h>
 #include <VideoData.h>
-#include <KoShapeLoadingContext.h>
-#include <KoOdfLoadingContext.h>
-#include <KoShapeSavingContext.h>
-#include <KoXmlWriter.h>
-#include <KoXmlNS.h>
-#include <KoStoreDevice.h>
-#include <KoUnit.h>
+#include <KShapeLoadingContext.h>
+#include <KOdfLoadingContext.h>
+#include <KShapeSavingContext.h>
+#include <KXmlWriter.h>
+#include <KOdfXmlNS.h>
+#include <KOdfStorageDevice.h>
+#include <KUnit.h>
 
 #include <QPainter>
 #include <kdebug.h>
 #include <kurl.h>
 
 VideoShape::VideoShape()
-    : KoFrameShape(KoXmlNS::draw, "plugin")
+    : KFrameShape(KOdfXmlNS::draw, "plugin")
     , m_videoEventAction(new VideoEventAction(this))
 {
     setKeepAspectRatio(true);
@@ -50,7 +50,7 @@ VideoShape::~VideoShape()
 {
 }
 
-void VideoShape::paint(QPainter &painter, const KoViewConverter &converter)
+void VideoShape::paint(QPainter &painter, const KViewConverter &converter)
 {
     QRectF pixelsF = converter.documentToView(QRectF(QPointF(0,0), size()));
     VideoData *videoData = qobject_cast<VideoData*>(userData());
@@ -63,14 +63,14 @@ void VideoShape::paint(QPainter &painter, const KoViewConverter &converter)
     painter.fillRect(pixelsF, QColor(Qt::green));
 }
 
-void VideoShape::saveOdf(KoShapeSavingContext &context) const
+void VideoShape::saveOdf(KShapeSavingContext &context) const
 {
     // make sure we have a valid image data pointer before saving
     VideoData *videoData = qobject_cast<VideoData*>(userData());
     if (videoData == 0)
         return;
 
-    KoXmlWriter &writer = context.xmlWriter();
+    KXmlWriter &writer = context.xmlWriter();
 
     writer.startElement("draw:frame");
     saveOdfAttributes(context, OdfAllAttributes);
@@ -92,13 +92,13 @@ void VideoShape::saveOdf(KoShapeSavingContext &context) const
     context.addDataCenter(m_videoCollection);
 }
 
-bool VideoShape::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool VideoShape::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     loadOdfAttributes(element, context, OdfAllAttributes);
     return loadOdfFrame(element, context);
 }
 
-bool VideoShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool VideoShape::loadOdfFrameElement(const KXmlElement &element, KShapeLoadingContext &context)
 {
     /* the loading of the attributes might set the event actions which removes the m_videoEventAction
      * when there are other eventactions for the shape. Therefore we need to add it again. It is no
@@ -122,7 +122,7 @@ bool VideoShape::loadOdfFrameElement(const KoXmlElement &element, KoShapeLoading
                 data = m_videoCollection->createExternalVideoData(href);
             } else {
                 // file is inside store
-                KoStore *store = context.odfLoadingContext().store();
+                KOdfStore *store = context.odfLoadingContext().store();
                 data = m_videoCollection->createVideoData(href, store);
             }
             setUserData(data);

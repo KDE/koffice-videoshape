@@ -19,7 +19,7 @@
 #ifndef VIDEOEVENTACTION_H
 #define VIDEOEVENTACTION_H
 
-#include <KoEventAction.h>
+#include <KEventAction.h>
 
 class VideoShape;
 class FullScreenPlayer;
@@ -27,7 +27,7 @@ class FullScreenPlayer;
 /**
  * This class represents the click event action that starts the playing of the video.
  */
-class VideoEventAction : public KoEventAction
+class VideoEventAction : public KEventAction
 {
 public:
     VideoEventAction(VideoShape *parent);
@@ -35,8 +35,8 @@ public:
     /// destructor
     virtual ~VideoEventAction();
 
-    virtual bool loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context);
-    virtual void saveOdf(KoShapeSavingContext &context) const;
+    virtual bool loadOdf(const KXmlElement &element, KShapeLoadingContext &context);
+    virtual void saveOdf(KShapeSavingContext &context) const;
 
     virtual void start();
     virtual void finish();

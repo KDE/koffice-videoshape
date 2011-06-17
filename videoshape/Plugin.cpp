@@ -19,7 +19,7 @@
 #include "Plugin.h"
 #include "VideoShapeFactory.h"
 
-#include <KoShapeRegistry.h>
+#include <KShapeRegistry.h>
 
 #include <kpluginfactory.h>
 
@@ -30,8 +30,8 @@ K_EXPORT_PLUGIN(PluginFactory("VideoShape"))
 Plugin::Plugin(QObject *parent, const QVariantList &)
     : QObject(parent)
 {
-    KoShapeRegistry::instance()->add( new VideoShapeFactory(parent) );
-//    KoToolRegistry::instance()->add( new VideoToolFactory(parent) );
+    KShapeRegistry::instance()->add( new VideoShapeFactory(parent) );
+//    KToolRegistry::instance()->add( new VideoToolFactory(parent) );
 }
 
 #include <Plugin.moc>

@@ -19,9 +19,9 @@
 
 #include "VideoEventAction.h"
 
-#include <KoXmlReader.h>
-#include <KoShapeLoadingContext.h>
-#include <KoShapeSavingContext.h>
+#include <KXmlReader.h>
+#include <KShapeLoadingContext.h>
+#include <KShapeSavingContext.h>
 #include <kdebug.h>
 
 #include <QUrl>
@@ -32,7 +32,7 @@
 #include "FullScreenPlayer.h"
 
 VideoEventAction::VideoEventAction(VideoShape *parent)
-    : KoEventAction()
+    : KEventAction()
     ,m_shape(parent)
     ,m_player(0)
 {
@@ -43,14 +43,14 @@ VideoEventAction::~VideoEventAction()
 {
 }
 
-bool VideoEventAction::loadOdf(const KoXmlElement &element, KoShapeLoadingContext &context)
+bool VideoEventAction::loadOdf(const KXmlElement &element, KShapeLoadingContext &context)
 {
     Q_UNUSED(element);
     Q_UNUSED(context);
     return true;
 }
 
-void VideoEventAction::saveOdf(KoShapeSavingContext &context) const
+void VideoEventAction::saveOdf(KShapeSavingContext &context) const
 {
     Q_UNUSED(context);
 }
